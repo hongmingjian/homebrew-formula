@@ -2,9 +2,9 @@ require 'formula'
 
 class I586ElfGcc < Formula
   homepage "http://gcc.gnu.org"
-  url "http://ftpmirror.gnu.org/gcc/gcc-4.9.2/gcc-5.3.0.tar.bz2"
+  url "http://ftpmirror.gnu.org/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2"
   mirror "ftp://gcc.gnu.org/pub/gcc/releases/gcc-5.3.0/gcc-5.3.0.tar.bz2"
-  sha1 "0612270b103941da08376df4d0ef4e5662a2e9eb"
+  sha256 "b84f5592e9218b73dbae612b5253035a7b34a9a1f7688d2e1bfaaf7267d5c4db"
 
   depends_on 'gmp'
   depends_on 'libmpc'

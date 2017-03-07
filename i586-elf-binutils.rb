@@ -4,7 +4,7 @@ class I586ElfBinutils < Formula
   homepage "http://www.gnu.org/software/binutils/binutils.html"
   url "http://ftpmirror.gnu.org/binutils/binutils-2.26.tar.gz"
   mirror "http://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.gz"
-  sha1 "bb933ec42eb2002d9270bd4c62a26c3706589ee9"
+  sha256 "9615feddaeedc214d1a1ecd77b6697449c952eab69d79ab2125ea050e944bcc1"
 
   def install
     system "./configure", "--disable-debug",
