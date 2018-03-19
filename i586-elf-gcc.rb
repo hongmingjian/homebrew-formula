@@ -14,7 +14,7 @@ class I586ElfGcc < Formula
   depends_on 'isl'
 
   def install
-    binutils = Formula.factory 'i586-elf-binutils'
+    binutils = Formulary.factory 'i586-elf-binutils'
 
     mkdir 'build' do
       system '../configure', '--disable-nls', '--target=i586-elf',
