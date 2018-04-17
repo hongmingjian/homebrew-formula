@@ -1,0 +1,10 @@
+--- gcc/system.h.orig	2018-04-17 23:48:22.000000000 +0800
++++ gcc/system.h	2018-04-17 23:48:33.000000000 +0800
+@@ -216,6 +216,7 @@
+ 
+ #ifdef __cplusplus
+ # include <algorithm>
++# include <memory>
+ # include <cstring>
+ # include <utility>
+ #endif
