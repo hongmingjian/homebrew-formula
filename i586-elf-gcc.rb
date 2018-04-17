@@ -13,6 +13,11 @@ class I586ElfGcc < Formula
   depends_on 'cloog'
   depends_on 'isl'
 
+  patch :p0 do
+	url	"https://raw.githubusercontent.com/hongmingjian/homebrew-formula/master/gcc-5.3.0.patch"
+	sha256 "22135568ba557ee781c3857286928478e391f7d1ffc3e2fb62b1ad4522ff1a8b"
+  end
+
   def install
     binutils = Formulary.factory 'i586-elf-binutils'
 
