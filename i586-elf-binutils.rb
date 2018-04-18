@@ -1,23 +1,24 @@
 require 'formula'
 
 class I586ElfBinutils < Formula
-  homepage "http://www.gnu.org/software/binutils/binutils.html"
-  url "http://ftpmirror.gnu.org/binutils/binutils-2.26.tar.gz"
-  mirror "http://ftp.gnu.org/gnu/binutils/binutils-2.26.tar.gz"
-  sha256 "9615feddaeedc214d1a1ecd77b6697449c952eab69d79ab2125ea050e944bcc1"
+  homepage 'http://gcc.gnu.org'
+  url 'http://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.gz'
+  sha256 '26253bf0f360ceeba1d9ab6965c57c6a48a01a8343382130d1ed47c468a3094f'
 
+  depends_on 'gcc' => :build
   def install
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--prefix=#{prefix}",
-                          "--infodir=#{info}",
-                          "--mandir=#{man}",
-                          "--target=i586-elf",
-                          "--disable-werror",
-                          "--enable-interwork"
-    system "make"
-    system "make", "install"
-    FileUtils.rm_rf share
+    ENV['CC'] = '/usr/local/opt/gcc/bin/gcc-7'
+    ENV['CXX'] = '/usr/local/opt/gcc/bin/g++-7'
+    ENV['CPP'] = '/usr/local/opt/gcc/bin/cpp-7'
+    ENV['LD'] = '/usr/local/opt/gcc/bin/gcc-7'
+
+    mkdir 'build' do
+      system '../configure', '--disable-nls', '--target=i586-elf','--disable-werror',
+                             '--enable-gold=yes',
+                             "--prefix=#{prefix}"
+      system 'make all'
+      system 'make install'
+    end
   end
 
 end

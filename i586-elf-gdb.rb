@@ -1,26 +1,24 @@
 require 'formula'
 
 class I586ElfGdb < Formula
-  homepage "https://www.gnu.org/software/gdb/"
-  url "http://ftpmirror.gnu.org/gdb/gdb-7.11.tar.xz"
-  mirror "https://ftp.gnu.org/gnu/gdb/gdb-7.11.tar.xz"
-  sha256 "7a434116cb630d77bb40776e8f5d3937bed11dea56bafebb4d2bc5dd389fe5c1"
+  homepage 'http://gcc.gnu.org'
+  url 'http://ftp.gnu.org/gnu/gdb/gdb-7.11.1.tar.xz'
+  sha256 'e9216da4e3755e9f414c1aa0026b626251dfc57ffe572a266e98da4f6988fc70'
 
   depends_on 'i586-elf-binutils'
   depends_on 'i586-elf-gcc'
-  depends_on 'xz'
-  depends_on 'readline'
 
   def install
+    ENV['CC'] = '/usr/local/opt/gcc/bin/gcc-7'
+    ENV['CXX'] = '/usr/local/opt/gcc/bin/g++-7'
+    ENV['CPP'] = '/usr/local/opt/gcc/bin/cpp-7'
+    ENV['LD'] = '/usr/local/opt/gcc/bin/gcc-7'
+
     mkdir 'build' do
-      system '../configure', '--target=i586-elf', "--prefix=#{prefix}",
-             '--disable-debug',
-             '--disable-dependency-tracking',
-             '--with-system-readline'
+      system '../configure', '--target=i586-elf', "--prefix=#{prefix}", "--disable-werror"
       system 'make'
       system 'make install'
       FileUtils.rm_rf share/"locale"
-      FileUtils.rm_rf share/"info"
     end
   end
 end
