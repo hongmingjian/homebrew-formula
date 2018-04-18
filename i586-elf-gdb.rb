@@ -1,24 +1,22 @@
-require 'formula'
-
 class I586ElfGdb < Formula
-  homepage 'http://gcc.gnu.org'
-  url 'http://ftp.gnu.org/gnu/gdb/gdb-7.11.1.tar.xz'
-  sha256 'e9216da4e3755e9f414c1aa0026b626251dfc57ffe572a266e98da4f6988fc70'
-
-  depends_on 'i586-elf-binutils'
-  depends_on 'i586-elf-gcc'
+  desc "GNU Project Debugger targetting i586-elf"
+  homepage "https://www.gnu.org/software/gdb/"
+  url "https://ftp.gnu.org/gnu/gdb/gdb-8.1.tar.xz"
+  version "8.1"
+  sha256 "af61a0263858e69c5dce51eab26662ff3d2ad9aa68da9583e8143b5426be4b34"
 
   def install
-    ENV['CC'] = '/usr/local/opt/gcc/bin/gcc-7'
-    ENV['CXX'] = '/usr/local/opt/gcc/bin/g++-7'
-    ENV['CPP'] = '/usr/local/opt/gcc/bin/cpp-7'
-    ENV['LD'] = '/usr/local/opt/gcc/bin/gcc-7'
+    system "./configure", "--prefix=#{prefix}",
+                          "--target=i586-elf",
+                          "--program-prefix=i586-elf-",
+                          "--disable-werror"
 
-    mkdir 'build' do
-      system '../configure', '--target=i586-elf', "--prefix=#{prefix}", "--disable-werror"
-      system 'make'
-      system 'make install'
-      FileUtils.rm_rf share/"locale"
-    end
+    system "make"
+    system "make", "install"
+
+    # Conflict with i586-elf-binutils
+    FileUtils.rm_rf "#{prefix}/share/info"
+    FileUtils.rm_rf "#{prefix}/share/locale"
   end
+
 end

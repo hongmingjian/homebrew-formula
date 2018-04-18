@@ -1,42 +1,38 @@
-require 'formula'
-
 class I586ElfGcc < Formula
-  homepage 'http://gcc.gnu.org'
-  url "http://mirror.tochlab.net/pub/gnu/gcc/gcc-7.1.0/gcc-7.1.0.tar.bz2"
-  mirror "https://ftp.gnu.org/gnu/gcc/gcc-7.1.0/gcc-7.1.0.tar.bz2"
-  sha256 "8a8136c235f64c6fef69cac0d73a46a1a09bb250776a050aec8f9fc880bebc17"
+  desc "GNU Compiler Collection targetting i586-elf"
+  homepage "https://gcc.gnu.org"
+  url "http://ftpmirror.gnu.org/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz"
+  version "7.3.0"
+  sha256 "832ca6ae04636adbb430e865a1451adf6979ab44ca1c8374f61fba65645ce15c"
 
-  depends_on "gmp"
+  depends_on "gmp" => :build
+  depends_on "i586-elf-binutils"
   depends_on "libmpc"
-  depends_on "mpfr"
-  depends_on "isl"
-  depends_on 'i586-elf-binutils'
+  depends_on "mpfr" => :build
 
   def install
-    binutils = Formulary.factory 'i586-elf-binutils'
-
-
-    ENV['CC'] = '/usr/local/opt/gcc/bin/gcc-7'
-    ENV['CXX'] = '/usr/local/opt/gcc/bin/g++-7'
-    ENV['CPP'] = '/usr/local/opt/gcc/bin/cpp-7'
-    ENV['LD'] = '/usr/local/opt/gcc/bin/gcc-7'
-    ENV['PATH'] += ":#{binutils.prefix/"bin"}"
-
-    mkdir 'build' do
-      system '../configure', '--disable-nls', '--target=i586-elf',
-                             '--disable-werror',
-                             "--prefix=#{prefix}",
-                             "--enable-languages=c",
+    mkdir "gcc-build" do
+      system "../configure", "--prefix=#{prefix}",
+                             "--target=i586-elf",
+                             "--disable-multilib",
+                             "--disable-nls",
+                             "--disable-werror",
                              "--without-headers",
-                             "--with-gmp=#{Formula["gmp"].opt_prefix}",
-                             "--with-mpfr=#{Formula["mpfr"].opt_prefix}",
-                             "--with-mpc=#{Formula["libmpc"].opt_prefix}"
-      system 'make all-gcc'
-      system 'make install-gcc'
-      FileUtils.ln_sf binutils.prefix/"i586-elf", prefix/"i586-elf"
-      system 'make all-target-libgcc'
-      system 'make install-target-libgcc'
-      FileUtils.rm_rf share/"man"/"man7"
+                             "--without-isl",
+                             "--enable-languages=c"
+
+      system "make", "all-gcc"
+      system "make", "install-gcc"
+      system "make", "all-target-libgcc"
+      system "make", "install-target-libgcc"
+
+      # GCC needs this folder in #{prefix} in order to see the binutils.
+      # It doesn't look for i586-elf-as on $PREFIX/bin. Rather, it looks
+      # for as on $PREFIX/$TARGET/bin/ ($PREFIX/i586-elf/bin/as).
+      binutils = Formula["i586-elf-binutils"].prefix
+      FileUtils.ln_sf "#{binutils}/i586-elf", "#{prefix}/i586-elf"
     end
+
   end
+
 end
