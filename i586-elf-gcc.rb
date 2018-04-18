@@ -1,7 +1,7 @@
 class I586ElfGcc < Formula
   desc "GNU Compiler Collection targetting i586-elf"
   homepage "https://gcc.gnu.org"
-  url "http://ftpmirror.gnu.org/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz"
+  url "http://mirrors.ustc.edu.cn/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz"
   version "7.3.0"
   sha256 "832ca6ae04636adbb430e865a1451adf6979ab44ca1c8374f61fba65645ce15c"
 
