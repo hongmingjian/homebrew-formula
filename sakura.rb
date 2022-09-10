@@ -9,7 +9,7 @@ class Sakura < Formula
   depends_on "pkg-config"
   depends_on "vte3"
   depends_on "pcre2"
-  depends_on :x11
+#  depends_on :x11
 
 #  patch do
 #    url "https://example.com/example_patch.diff"
