@@ -11,13 +11,13 @@ class Sakura < Formula
   depends_on "pcre2"
 #  depends_on :x11
 
-#  patch do
-#    url "https://example.com/example_patch.diff"
-#    sha256 "85cc828a96735bdafcf29eb6291ca91bac846579bcef7308536e0c875d6c81d7"
-#  end
+  patch do
+    url "https://raw.githubusercontent.com/hongmingjian/sakura/master/sakura.patch"
+    sha256 "3d36058990c864b8eca618557229503f99bc2d36ee0982285a7b7167e5503a11"
+  end
 
   def install
-    system "cmake", ".", "-DCMAKE_INSTALL_PREFIX=#{prefix}", *std_cmake_args
+    system "cmake", ".", *std_cmake_args
     system "make"#, "install"
   end
 end
