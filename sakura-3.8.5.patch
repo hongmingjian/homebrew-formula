@@ -1,0 +1,41 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d2ee72f..4882082 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,6 +11,11 @@ IF (NOT PKG_CONFIG_FOUND)
+ 	MESSAGE (FATAL_ERROR "pkg-config not found...")
+ ENDIF (NOT PKG_CONFIG_FOUND)
+ 
++pkg_check_modules (PCRE2 REQUIRED libpcre2-posix)
++IF (NOT PCRE2_FOUND)
++	MESSAGE(FATAL_ERROR "You don't seem to have pcre2 development libraries installed...")
++ENDIF (NOT PCRE2_FOUND)
++
+ pkg_check_modules (GLIB REQUIRED glib-2.0>=2.40)
+ IF (NOT GLIB_FOUND)
+ 	MESSAGE(FATAL_ERROR "You don't seem to have glib >= 2.40 development libraries installed...")
+@@ -44,9 +49,9 @@ ELSE (${CMAKE_BUILD_TYPE} NOT MATCHES "Debug")
+ 	SET (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wno-deprecated-declarations")
+ ENDIF (${CMAKE_BUILD_TYPE} MATCHES "Debug")
+ 
+-INCLUDE_DIRECTORIES (. ${GTK_INCLUDE_DIRS} ${VTE_INCLUDE_DIRS})
+-LINK_DIRECTORIES (${GTK_LIBRARY_DIRS} ${VTE_LIBRARY_DIRS} ${X11_LIBRARY_DIRS})
+-LINK_LIBRARIES (${GTK_LIBRARIES} ${VTE_LIBRARIES} ${X11_LIBRARIES} m)
++INCLUDE_DIRECTORIES (. ${GTK_INCLUDE_DIRS} ${VTE_INCLUDE_DIRS} ${PCRE2_INCLUDE_DIRS})
++LINK_DIRECTORIES (${GTK_LIBRARY_DIRS} ${VTE_LIBRARY_DIRS} ${X11_LIBRARY_DIRS} ${PCRE2_LIBRARY_DIRS})
++LINK_LIBRARIES (${GTK_LIBRARIES} ${VTE_LIBRARIES} ${X11_LIBRARIES} ${PCRE2_LIBRARIES} m)
+ ADD_EXECUTABLE (sakura src/sakura.c)
+ 
+ ADD_SUBDIRECTORY (po)
+diff --git a/src/sakura.c b/src/sakura.c
+index d842b3a..151fe40 100644
+--- a/src/sakura.c
++++ b/src/sakura.c
+@@ -37,7 +37,6 @@
+ #include <glib.h>
+ #include <glib/gstdio.h>
+ #include <gdk/gdk.h>
+-#include <gdk/gdkx.h>
+ #include <gtk/gtk.h>
+ #include <pango/pango.h>
+ #include <vte/vte.h>
