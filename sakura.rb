@@ -8,8 +8,6 @@ class Sakura < Formula
   depends_on "cmake" => :build
   depends_on "pkg-config"
   depends_on "vte3"
-  depends_on "pcre2"
-#  depends_on :x11
 
   patch do
     url "https://raw.githubusercontent.com/hongmingjian/homebrew-formula/master/sakura-3.8.5.patch"
