@@ -7,7 +7,7 @@ class Xfig < Formula
 
   depends_on "fig2dev"
   depends_on "jpeg"
-  depends_on :x11
+  depends_on "libx11"
 
   def install
     system "./configure", "--prefix=#{prefix}",
