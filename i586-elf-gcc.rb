@@ -2,7 +2,7 @@ class I586ElfGcc < Formula
   desc "GNU Compiler Collection targetting i586-elf"
   homepage "https://gcc.gnu.org"
   url "http://mirrors.ustc.edu.cn/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.xz"
-  version "12.2.0"
+  version "11.2.0"
   sha256 "d08edc536b54c372a1010ff6619dd274c0f1603aa49212ba20f7aa2cda36fa8b"
 
   depends_on "gmp" => :build
