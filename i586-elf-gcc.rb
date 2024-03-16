@@ -1,9 +1,9 @@
 class I586ElfGcc < Formula
   desc "GNU Compiler Collection targetting i586-elf"
   homepage "https://gcc.gnu.org"
-  url "http://mirrors.ustc.edu.cn/gnu/gcc/gcc-7.3.0/gcc-7.3.0.tar.xz"
-  version "7.3.0"
-  sha256 "832ca6ae04636adbb430e865a1451adf6979ab44ca1c8374f61fba65645ce15c"
+  url "http://mirrors.ustc.edu.cn/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.xz"
+  version "12.2.0"
+  sha256 "e549cf9cf3594a00e27b6589d4322d70e0720cdd213f39beb4181e06926230ff"
 
   depends_on "gmp" => :build
   depends_on "i586-elf-binutils"
@@ -32,7 +32,10 @@ class I586ElfGcc < Formula
       binutils = Formula["i586-elf-binutils"].prefix
       FileUtils.ln_sf "#{binutils}/i586-elf", "#{prefix}/i586-elf"
     end
-
   end
 
+  test do
+    # should try to compile something?
+    system "#{bin}/i586-elf-gcc", "--version"
+  end
 end
