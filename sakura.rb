@@ -1,9 +1,9 @@
 class Sakura < Formula
   desc "GTK/VTE based terminal emulator"
   homepage "https://launchpad.net/sakura"
-  url "https://github.com/dabisu/sakura/archive/refs/tags/SAKURA_3_8_5.zip"
-  version "3.8.5"
-  sha256 "531101d4dafb21c1db62568a5b5b49159bddc6aad17baf0a2b81ced311e23454"
+  url "https://github.com/dabisu/sakura/archive/refs/tags/SAKURA_3_8_7.zip"
+  version "3.8.7"
+  sha256 "5f29b142e9233d2fdc18e4bc9d15fbc2c1c3d386c9330d91954228fc7e1144ab"
 
   depends_on "cmake" => :build
   depends_on "pkg-config"
@@ -19,4 +19,3 @@ class Sakura < Formula
     system "make", "install"
   end
 end
-
