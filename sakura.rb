@@ -10,7 +10,7 @@ class Sakura < Formula
   depends_on "vte3"
 
   patch do
-    url "https://github.com/hongmingjian/homebrew-formula/blob/549d8cfe59573bc1d183a3565d0e3a858f946865/sakura-3.8.5.patch"
+    url "https://raw.githubusercontent.com/hongmingjian/homebrew-formula/549d8cfe59573bc1d183a3565d0e3a858f946865/sakura-3.8.5.patch"
     sha256 "3d36058990c864b8eca618557229503f99bc2d36ee0982285a7b7167e5503a11"
   end
 
